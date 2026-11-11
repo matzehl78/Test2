@@ -1,0 +1,14 @@
+{
+  "name": "Spielekiste",
+  "short_name": "Spielekiste",
+  "description": "Sammlung klassischer Spielprinzipien, offline spielbar.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#12161f",
+  "theme_color": "#12161f",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

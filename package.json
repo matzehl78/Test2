@@ -1,0 +1,22 @@
+{
+  "name": "spielekiste",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sammlung klassischer Spielprinzipien als Web- und Store-App",
+  "scripts": {
+    "start": "python3 -m http.server 8000 --directory www",
+    "sync": "cap sync",
+    "android": "cap sync android && cap open android",
+    "ios": "cap sync ios && cap open ios",
+    "assets": "capacitor-assets generate --iconBackgroundColor '#12161f' --iconBackgroundColorDark '#12161f' --splashBackgroundColor '#12161f' --splashBackgroundColorDark '#12161f'"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/ios": "^8.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.0"
+  }
+}

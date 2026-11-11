@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Spielekiste</string>
+    <string name="title_activity_main">Spielekiste</string>
+    <string name="package_name">de.spielekiste.app</string>
+    <string name="custom_url_scheme">de.spielekiste.app</string>
+</resources>
