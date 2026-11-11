@@ -2,6 +2,15 @@ name: Android-Build
 
 on:
   push:
+    branches: [main]
+    paths:
+      - 'www/**'
+      - 'android/**'
+      - 'assets/**'
+      - 'package*.json'
+      - 'capacitor.config.json'
+      - '.github/workflows/android.yml'
+  pull_request:
     paths:
       - 'www/**'
       - 'android/**'
