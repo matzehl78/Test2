@@ -41,7 +41,7 @@ npm run ios          # Web-Code übernehmen und Xcode öffnen (nur macOS)
 ```
 
 Nach jeder Änderung in `www/` einmal `npm run sync` ausführen.
-Eine Debug-APK zum Testen baut GitHub Actions bei jedem Push (Workflow „Android-Build“, Artefakt `spielekiste-debug-apk`).
+Eine Debug-APK zum Testen baut GitHub Actions für jeden Pull Request und jeden Push auf `main` (Workflow „Android-Build“, Artefakt `spielekiste-debug-apk`).
 
 Vor der ersten Veröffentlichung:
 
