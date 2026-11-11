@@ -239,6 +239,7 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) setPa
 
 route();
 
-if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+// In der Store-App liegen alle Dateien im Paket – der Service Worker ist nur im Browser nötig
+if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !window.Capacitor) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
