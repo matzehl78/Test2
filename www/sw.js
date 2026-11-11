@@ -1,5 +1,5 @@
 // Offline-Unterstützung: Netz zuerst (immer aktueller Stand), Cache als Rückfall.
-const CACHE = 'spielekiste-v2';
+const CACHE = 'spielekiste-v3';
 const FILES = [
   './', 'index.html', 'css/style.css', 'icon.svg', 'manifest.webmanifest',
   'js/app.js', 'js/games/blockfall.js', 'js/games/snake.js', 'js/games/breaker.js',

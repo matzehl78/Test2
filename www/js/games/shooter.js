@@ -9,6 +9,7 @@ export default {
   icon: '🚀',
   desc: 'Angreiferwellen abwehren.',
   help: 'Maus oder ← → steuert das Schiff · es feuert automatisch',
+  touch: 'Finger ziehen steuert das Schiff · es feuert automatisch',
 
   start(ctx) {
     const { g, pos } = ctx.canvas(W, H);
@@ -157,9 +158,19 @@ export default {
       }
     }
 
-    const follow = (e) => { if (!ctx.paused && !ctx.over) px = pos(e).x; };
-    ctx.on(ctx.stage, 'pointermove', follow);
-    ctx.on(ctx.stage, 'pointerdown', follow);
+    // Maus: Schiff folgt dem Zeiger. Touch: Finger zieht relativ, damit er das Schiff nicht verdeckt.
+    let lastX = null;
+    ctx.on(ctx.stage, 'pointerdown', (e) => {
+      if (ctx.paused || ctx.over) return;
+      if (e.pointerType === 'mouse') px = pos(e).x; else lastX = pos(e).x;
+    });
+    ctx.on(ctx.stage, 'pointermove', (e) => {
+      if (ctx.paused || ctx.over) return;
+      const x = pos(e).x;
+      if (e.pointerType === 'mouse') px = x;
+      else if (lastX !== null) { px += (x - lastX) * 1.4; lastX = x; }
+    });
+    for (const t of ['pointerup', 'pointercancel']) ctx.on(ctx.stage, t, () => { lastX = null; });
     ctx.keys((k) => {
       if (k === 'ArrowLeft') held.left = true;
       else if (k === 'ArrowRight') held.right = true;

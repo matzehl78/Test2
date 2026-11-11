@@ -21,7 +21,7 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-body { display: flex; flex-direction: column; height: 100dvh; }
+body { display: flex; flex-direction: column; height: 100dvh; touch-action: manipulation; }
 main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 main[hidden] { display: none; }
 
@@ -66,6 +66,7 @@ button:active { background: var(--line); }
 .card .best { font-size: .8rem; color: var(--accent); }
 
 /* ---------- Spielansicht ---------- */
+#game { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 #game header {
   display: flex;
   align-items: center;
@@ -143,12 +144,9 @@ button:active { background: var(--line); }
 #pad button { flex: 1; max-width: 90px; height: 56px; font-size: 1.4rem; }
 #pad button.on { background: var(--accent); border-color: var(--accent); color: #06241a; }
 
-/* Tastaturhinweise nur mit Maus/Tastatur, Touch-Tasten nur auf Touch-Geräten */
+/* Touch-Tasten nur auf Touch-Geräten */
 @media (hover: hover) and (pointer: fine) {
   #pad:not(.always) { display: none; }
-}
-@media (hover: none), (pointer: coarse) {
-  #help { display: none; }
 }
 
 /* ---------- DOM-Spiele (Minenfeld, Paare) ---------- */

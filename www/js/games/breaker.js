@@ -12,6 +12,7 @@ export default {
   icon: '🏓',
   desc: 'Ball abprallen lassen, Mauer abräumen.',
   help: 'Maus oder ← → bewegt den Schläger · Klick/Leertaste startet den Ball',
+  touch: 'Finger ziehen bewegt den Schläger · Tippen startet den Ball',
 
   start(ctx) {
     const { g, pos } = ctx.canvas(W, H);
@@ -113,9 +114,19 @@ export default {
       }
     }
 
-    ctx.on(ctx.stage, 'pointermove', (e) => { if (!ctx.paused) movePaddle(pos(e).x); });
-    ctx.on(ctx.stage, 'pointerdown', (e) => { movePaddle(pos(e).x); });
-    ctx.on(ctx.stage, 'pointerup', () => { if (!ctx.paused && !ctx.over) launch(); });
+    // Maus: Schläger folgt dem Zeiger. Touch: Finger zieht relativ, damit er den Schläger nicht verdeckt.
+    let lastX = null;
+    ctx.on(ctx.stage, 'pointerdown', (e) => {
+      if (e.pointerType === 'mouse') movePaddle(pos(e).x); else lastX = pos(e).x;
+    });
+    ctx.on(ctx.stage, 'pointermove', (e) => {
+      if (ctx.paused || ctx.over) return;
+      const x = pos(e).x;
+      if (e.pointerType === 'mouse') movePaddle(x);
+      else if (lastX !== null) { movePaddle(px + (x - lastX) * 1.4); lastX = x; }
+    });
+    ctx.on(ctx.stage, 'pointerup', () => { lastX = null; if (!ctx.paused && !ctx.over) launch(); });
+    ctx.on(ctx.stage, 'pointercancel', () => { lastX = null; });
     ctx.keys((k) => {
       if (k === 'ArrowLeft') held.left = true;
       else if (k === 'ArrowRight') held.right = true;

@@ -5,9 +5,9 @@ und als Store-App für Android und iOS. Der Spielcode kommt ohne Abhängigkeiten
 
 | Spiel | Prinzip | Steuerung |
 |---|---|---|
-| Blockfall | Fallende Blöcke stapeln, Reihen räumen | Pfeiltasten, Leertaste / Touch-Tasten |
+| Blockfall | Fallende Blöcke stapeln, Reihen räumen | Pfeiltasten, Leertaste / Ziehen, Tippen, Wischen oder Touch-Tasten |
 | Schlange | Futter sammeln, wachsen | Pfeiltasten / Wischen |
-| Mauerbrecher | Ball abprallen lassen, Steine abräumen | Maus, Pfeiltasten / Finger |
+| Mauerbrecher | Ball abprallen lassen, Steine abräumen | Maus, Pfeiltasten / Finger ziehen, Tippen startet |
 | Minenfeld | Felder logisch aufdecken | Klick, Rechtsklick / Tippen, lang drücken |
 | Paare | Gleiche Karten finden | Klick / Tippen |
 | Zahlenschmelze | Kacheln schieben, gleiche Zahlen verschmelzen | Pfeiltasten / Wischen |

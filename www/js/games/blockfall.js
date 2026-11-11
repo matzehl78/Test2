@@ -20,9 +20,10 @@ export default {
   icon: '🧱',
   desc: 'Blöcke stapeln, Reihen räumen.',
   help: '← → bewegen · ↑ drehen · ↓ schneller · Leertaste fallen lassen · P Pause',
+  touch: 'Ziehen bewegt · Tippen dreht · schnell nach unten wischen lässt fallen',
 
   start(ctx) {
-    const { g } = ctx.canvas(W * C + SIDE, H * C);
+    const { g, canvas } = ctx.canvas(W * C + SIDE, H * C);
     const grid = Array.from({ length: H }, () => Array(W).fill(0)); // 0 = leer, sonst Farbindex+1
     let bag = [];
     const draw7 = () => {
@@ -154,6 +155,30 @@ export default {
       else return false;
       return true;
     });
+
+    // Touch: ziehen bewegt spaltenweise, tippen dreht, schneller Wisch nach unten lässt fallen
+    let drag = null;
+    ctx.on(ctx.stage, 'pointerdown', (e) => {
+      if (e.pointerType === 'mouse' || ctx.paused || ctx.over) return;
+      drag = { id: e.pointerId, x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now(), moved: false, piece: cur };
+    });
+    ctx.on(ctx.stage, 'pointermove', (e) => {
+      if (!drag || e.pointerId !== drag.id || ctx.paused || ctx.over || cur !== drag.piece) return;
+      const unit = canvas.getBoundingClientRect().height / H; // eine Zelle in Bildschirmpixeln
+      while (e.clientX - drag.x >= unit) { move(1); drag.x += unit; drag.moved = true; }
+      while (drag.x - e.clientX >= unit) { move(-1); drag.x -= unit; drag.moved = true; }
+      while (e.clientY - drag.y >= unit && cur === drag.piece) { step(true); drag.y += unit; drag.moved = true; }
+    });
+    ctx.on(window, 'pointerup', (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const d = drag, dt = performance.now() - d.t;
+      const dx = e.clientX - d.x0, dy = e.clientY - d.y0;
+      drag = null;
+      if (ctx.paused || ctx.over || cur !== d.piece) return;
+      if (dt < 300 && dy > 50 && dy > Math.abs(dx) * 1.5) hardDrop();
+      else if (!d.moved && dt < 300) rotate();
+    });
+    ctx.on(window, 'pointercancel', () => { drag = null; });
 
     ctx.pad([
       { label: '◀', fn: () => move(-1), repeat: 110 },

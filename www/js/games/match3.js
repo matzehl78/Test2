@@ -9,6 +9,7 @@ export default {
   icon: '💎',
   desc: 'Steine tauschen, Dreierreihen bilden.',
   help: 'Stein anklicken, dann Nachbarn anklicken – oder Stein in eine Richtung ziehen',
+  touch: 'Stein zum Nachbarn ziehen – oder beide nacheinander antippen',
 
   start(ctx) {
     const { g, pos } = ctx.canvas(S, S);

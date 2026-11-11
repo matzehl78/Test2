@@ -73,6 +73,7 @@ export default {
   icon: '🧩',
   desc: 'Ziffern 1–9 logisch eintragen.',
   help: 'Feld wählen, Ziffer tippen · Entf löscht · Pfeiltasten bewegen',
+  touch: 'Feld antippen, dann Ziffer wählen · ⌫ löscht',
 
   start(ctx) {
     const { solution, puzzle } = generate();

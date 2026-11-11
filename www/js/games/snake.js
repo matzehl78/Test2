@@ -10,6 +10,7 @@ export default {
   icon: '🐍',
   desc: 'Futter sammeln und wachsen.',
   help: 'Pfeiltasten lenken · P Pause',
+  touch: 'Wischen lenkt die Schlange',
 
   start(ctx) {
     const { g } = ctx.canvas(N * C, N * C);
@@ -73,7 +74,7 @@ export default {
       turn(KEYS[k]);
       return true;
     });
-    ctx.swipe(turn);
+    ctx.swipe(turn, true);
     ctx.pad([
       { label: '◀', fn: () => turn('left') },
       { label: '▲', fn: () => turn('up') },

@@ -25,6 +25,7 @@ export default {
   icon: '🟢',
   desc: 'Vier in eine Linie – gegen den Computer.',
   help: 'Spalte anklicken oder ← → wählen und Leertaste',
+  touch: 'Spalte antippen, um einen Stein einzuwerfen',
 
   start(ctx) {
     const { g, pos } = ctx.canvas(W, H);

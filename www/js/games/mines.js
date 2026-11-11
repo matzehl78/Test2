@@ -8,6 +8,7 @@ export default {
   icon: '💣',
   desc: 'Logisch aufdecken, Minen meiden.',
   help: 'Klick deckt auf · Rechtsklick setzt eine Flagge',
+  touch: 'Tippen deckt auf · lang drücken oder 🚩-Modus setzt eine Flagge',
 
   start(ctx) {
     const cells = []; // { mine, open, flag, n, btn }
@@ -91,6 +92,7 @@ export default {
           if (ctx.over || ctx.paused) return;
           longPressed = true;
           toggleFlag(i);
+          if (navigator.vibrate) navigator.vibrate(30);
         }, 450);
       });
       for (const t of ['pointerup', 'pointerleave', 'pointercancel']) ctx.on(btn, t, () => clearTimeout(press));

@@ -17,6 +17,8 @@ import match3 from './games/match3.js';
 const GAMES = [blockfall, snake, breaker, mines, pairs, merge, connect, sudoku, shooter, match3];
 const STORE_KEY = 'spielekiste.best';
 
+const TOUCH = matchMedia('(pointer: coarse)').matches;
+
 const $ = (id) => document.getElementById(id);
 const el = {
   menu: $('menu'), grid: $('grid'), game: $('game'), title: $('title'),
@@ -73,7 +75,7 @@ function startGame(game) {
   let best = loadBest()[game.id] || 0;
 
   el.title.textContent = game.name;
-  el.help.textContent = game.help || '';
+  el.help.textContent = (TOUCH && game.touch) || game.help || '';
   el.score.textContent = '0';
   el.best.textContent = best;
   el.info.textContent = '';
@@ -168,17 +170,26 @@ function startGame(game) {
       });
     },
 
-    // fn('left' | 'right' | 'up' | 'down' | 'tap')
-    swipe(fn) {
-      let sx = 0, sy = 0, down = false;
-      ctx.on(el.stage, 'pointerdown', (e) => { sx = e.clientX; sy = e.clientY; down = true; });
-      ctx.on(el.stage, 'pointerup', (e) => {
-        if (!down || ctx.paused || ctx.over) return;
-        down = false;
+    // fn('left' | 'right' | 'up' | 'down' | 'tap'). Die Richtung wird schon während der
+    // Bewegung gemeldet; mit repeat=true mehrfach pro Berührung (Richtungswechsel ohne Absetzen).
+    swipe(fn, repeat = false) {
+      let sx = 0, sy = 0, id = null, fired = false;
+      ctx.on(el.stage, 'pointerdown', (e) => { sx = e.clientX; sy = e.clientY; id = e.pointerId; fired = false; });
+      ctx.on(el.stage, 'pointermove', (e) => {
+        if (e.pointerId !== id || ctx.paused || ctx.over || (fired && !repeat)) return;
         const dx = e.clientX - sx, dy = e.clientY - sy;
-        if (Math.max(Math.abs(dx), Math.abs(dy)) < 24) return fn('tap');
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < 24) return;
+        fired = true;
+        sx = e.clientX;
+        sy = e.clientY;
         fn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
       });
+      ctx.on(window, 'pointerup', (e) => {
+        if (e.pointerId !== id) return;
+        id = null;
+        if (!fired && !ctx.paused && !ctx.over) fn('tap');
+      });
+      ctx.on(window, 'pointercancel', (e) => { if (e.pointerId === id) id = null; });
     },
 
     score(n) { el.score.textContent = n; },

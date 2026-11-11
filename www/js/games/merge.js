@@ -17,6 +17,7 @@ export default {
   icon: '🔢',
   desc: 'Gleiche Zahlen zusammenschieben.',
   help: 'Pfeiltasten schieben alle Kacheln · gleiche Zahlen verschmelzen',
+  touch: 'Wischen schiebt alle Kacheln · gleiche Zahlen verschmelzen',
 
   start(ctx) {
     const { g } = ctx.canvas(S, S);
