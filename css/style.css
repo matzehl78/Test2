@@ -174,3 +174,17 @@ button:active { background: var(--line); }
 .pairs button { font-size: clamp(1.4rem, 9vmin, 3rem); transition: transform .15s, background .15s; }
 .pairs button.up { background: #10141d; transform: rotateY(180deg) scaleX(-1); }
 .pairs button.done { background: #173529; border-color: var(--accent); cursor: default; }
+
+#pad.compact { gap: 4px; }
+#pad.compact button { min-width: 0; padding: 0; height: 48px; font-size: 1.15rem; max-width: 56px; }
+
+.sudoku { gap: 2px; }
+.sudoku button { border-radius: 3px; background: var(--panel); color: var(--accent); }
+.sudoku button:nth-child(9n+3), .sudoku button:nth-child(9n+6) { margin-right: 4px; }
+.sudoku button:nth-child(n+19):nth-child(-n+27),
+.sudoku button:nth-child(n+46):nth-child(-n+54) { margin-bottom: 4px; }
+.sudoku button.given { color: var(--text); background: var(--panel2); }
+.sudoku button.peer { background: #2b3650; }
+.sudoku button.same { background: #2f5568; }
+.sudoku button.sel { background: #3d4a6b; outline: 2px solid var(--accent); outline-offset: -2px; }
+.sudoku button.wrong { color: var(--danger); }

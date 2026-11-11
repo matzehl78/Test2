@@ -10,6 +10,11 @@ ohne Abhängigkeiten und ohne Build-Schritt.
 | Mauerbrecher | Ball abprallen lassen, Steine abräumen | Maus, Pfeiltasten / Finger |
 | Minenfeld | Felder logisch aufdecken | Klick, Rechtsklick / Tippen, lang drücken |
 | Paare | Gleiche Karten finden | Klick / Tippen |
+| Zahlenschmelze | Kacheln schieben, gleiche Zahlen verschmelzen | Pfeiltasten / Wischen |
+| Viererreihe | Vier in eine Linie, gegen den Computer | Klick, Pfeiltasten + Leertaste / Tippen |
+| Sudoku | Ziffern 1–9 eintragen, zufällig erzeugte Rätsel | Klick + Zifferntasten / Ziffernleiste |
+| Sternenwacht | Angreiferwellen abwehren | Maus, Pfeiltasten / Finger |
+| Dreierkette | Steine tauschen, Dreierreihen bilden | Klick oder Ziehen |
 
 `P` pausiert, `Esc` führt zurück zur Übersicht. Bestwerte liegen im `localStorage` des Browsers.
 

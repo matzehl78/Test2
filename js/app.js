@@ -8,8 +8,13 @@ import snake from './games/snake.js';
 import breaker from './games/breaker.js';
 import mines from './games/mines.js';
 import pairs from './games/pairs.js';
+import merge from './games/merge.js';
+import connect from './games/connect.js';
+import sudoku from './games/sudoku.js';
+import shooter from './games/shooter.js';
+import match3 from './games/match3.js';
 
-const GAMES = [blockfall, snake, breaker, mines, pairs];
+const GAMES = [blockfall, snake, breaker, mines, pairs, merge, connect, sudoku, shooter, match3];
 const STORE_KEY = 'spielekiste.best';
 
 const $ = (id) => document.getElementById(id);
